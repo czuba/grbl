@@ -4,7 +4,7 @@
 
 ### **Caution:**
 
-This version of the Grbl controler has been specifically modified for computer controlled viewing distance manipulations of the **_ViewDist 3D Display System_** designed by [Thad Czuba](www.visualstimul.us) at The University of Texas Austin.
+This version of the Grbl controler has been specifically modified for computer controlled viewing distance manipulations of the **_ViewDist 3D Display System_** designed by _[Thad Czuba](http://visualstimul.us)_ at The University of Texas Austin.
 
 
 - Some standard features that have been repurposed may render this version unsafe for use as an actual CNC setup (e.g. yoked drive axes and/or spindle control limitations).
@@ -14,7 +14,7 @@ This version of the Grbl controler has been specifically modified for computer c
 -#noLifeguard
 ```
 
-- This is based on Grbl release _ver. 1.1e_. As of 2019, there have been a few minor updates to the main repo, but nothing that should/would have a significant impact on ViewDist functionality...certainly none that would outweigh the cost of fighting any problems that might arise. --TBC Jan 2019
+- This is based on _Grbl ver. 1.1e_. As of 2019, there have been a few minor updates to the main repo, but nothing that should/would have a significant impact on ViewDist functionality...certainly none that would outweigh the cost of fighting any problems that might arise. --TBC Jan 2019
 ***
 [standard Grbl readme follows...]
 
