@@ -1,6 +1,12 @@
 /*
   motion_control.c - high level interface for issuing motion commands
   Part of Grbl
+ 
+ *** WARNING: Spindle no longer halted by mc_reset (called during homing) ***
+ ** Nyet! ...did not actually prevent homing from stopping spindle.  (TBC 20170203)
+        // Kill spindle and coolant.
+        // spindle_stop(); // TBC: Commented out so that spindle pwm can be used as charge pump signal. ...
+
 
   Copyright (c) 2011-2016 Sungeun K. Jeon for Gnea Research LLC
   Copyright (c) 2009-2011 Simen Svale Skogsrud
@@ -350,7 +356,7 @@ void mc_reset()
     system_set_exec_state_flag(EXEC_RESET);
 
     // Kill spindle and coolant.
-    spindle_stop();
+    spindle_stop(); // TBC: Commented out so that spindle pwm can be used as charge pump signal. ...did not work though, re enabled this line (TBC 20170203)
     coolant_stop();
 
     // Kill steppers only if in any motion state, i.e. cycle, actively holding, or homing.

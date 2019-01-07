@@ -1,7 +1,25 @@
-![GitHub Logo](/doc/media/Grbl Logo 250px.png)
+![GitHub Logo](https://github.com/gnea/gnea-Media/blob/master/Grbl%20Logo/Grbl%20Logo%20250px.png?raw=true)
+
 ***
-_Click the `Release` tab to download pre-compiled `.hex` files or just [click here](https://github.com/gnea/grbl/releases)_
+
+### **Caution:**
+
+This version of the Grbl controler has been specifically modified for computer controlled viewing distance manipulations of the **_ViewDist 3D Display System_** designed by [Thad Czuba](www.visualstimul.us) at The University of Texas Austin.
+
+
+- Some standard features that have been repurposed may render this version unsafe for use as an actual CNC setup (e.g. yoked drive axes and/or spindle control limitations).
+- **If you intend to use this for anything other than a _ViewDist rig_**—or don't know exactly what that term refers to—please head over to the _[official Grbl project page](https://github.com/gnea/grbl)_, and/or proceed with caution. 
+
+``` diff
+-#noLifeguard
+```
+
+- This is based on Grbl release _ver. 1.1e_. As of 2019, there have been a few minor updates to the main repo, but nothing that should/would have a significant impact on ViewDist functionality...certainly none that would outweigh the cost of fighting any problems that might arise. --TBC Jan 2019
 ***
+[standard Grbl readme follows...]
+
+## Grbl Overview
+
 Grbl is a no-compromise, high performance, low cost alternative to parallel-port-based motion control for CNC milling. This version of Grbl runs on an Arduino with a 328p processor (Uno, Duemilanove, Nano, Micro, etc).
 
 The controller is written in highly optimized C utilizing every clever feature of the AVR-chips to achieve precise timing and asynchronous operation. It is able to maintain up to 30kHz of stable, jitter free control pulses.
@@ -19,14 +37,9 @@ Grbl includes full acceleration management with look ahead. That means the contr
 * Built on the wonderful Grbl v0.6 (2011) firmware written by Simen Svale Skogsrud (Norway).
 
 ***
-
-### Official Supporters of the Grbl CNC Project
-![Official Supporters](https://dl.dropboxusercontent.com/u/2221997/Contributors.png)
-
-
 ***
 
-##Update Summary for v1.1
+## Update Summary for v1.1
 - **IMPORTANT:** Your EEPROM will be wiped and restored with new settings. This is due to the addition of two new spindle speed '$' settings.
 
 - **Real-time Overrides** : Alters the machine running state immediately with feed, rapid, spindle speed, spindle stop, and coolant toggle controls. This awesome new feature is common only on industrial machines, often used to optimize speeds and feeds while a job is running. Most hobby CNC's try to mimic this behavior, but usually have large amounts of lag. Grbl executes overrides in realtime and within tens of milliseconds.
@@ -59,8 +72,6 @@ Grbl includes full acceleration management with look ahead. That means the contr
 - **NOTE:** Arduino Mega2560 support has been moved to an active, official Grbl-Mega [project](http://www.github.com/gnea/grbl-Mega/). All new developments here and there will be synced when it makes sense to.
 
 
--
-
 ```
 List of Supported G-Codes in Grbl v1.1:
   - Non-Modal Commands: G4, G10L2, G10L20, G28, G30, G28.1, G30.1, G53, G92, G92.1
@@ -82,5 +93,3 @@ List of Supported G-Codes in Grbl v1.1:
 
 -------------
 Grbl is an open-source project and fueled by the free-time of our intrepid administrators and altruistic users. If you'd like to donate, all proceeds will be used to help fund supporting hardware and testing equipment. Thank you!
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CUGXJHXA36BYW)

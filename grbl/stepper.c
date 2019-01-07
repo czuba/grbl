@@ -21,6 +21,12 @@
 
 #include "grbl.h"
 
+//---//
+// From spindle_control.c   TBC 2017-02-17
+#ifdef VARIABLE_SPINDLE
+static float pwm_gradient; // Precalulated value to speed up rpm to PWM conversions.
+#endif
+//---//
 
 // Some useful constants.
 #define DT_SEGMENT (1.0/(ACCELERATION_TICKS_PER_SECOND*60.0)) // min/segment
@@ -206,6 +212,36 @@ static st_prep_t prep;
 // enabled. Startup init and limits call this function but shouldn't start the cycle.
 void st_wake_up()
 {
+
+    // moved speed settings to spindle_init() b/c never change in this mode
+//    // Engage spindle PWM as Gecko G540 charge pump signal  TBC 2017-02-17
+//    // pwm_gradient = SPINDLE_PWM_RANGE/(settings.rpm_max-settings.rpm_min);
+//    
+//        // From: spindle_control.c >> spindle_set_speed(uint8_t pwm_value)
+//        uint8_t pwm_value;
+//        float rpm;
+//        // rpm *= (0.010*sys.spindle_speed_ovr); // Scale by spindle speed override value.
+//        rpm = 6000;
+//        // Calculate PWM register value based on rpm max/min settings and programmed rpm.
+//          sys.spindle_speed = rpm;
+//          // pwm_value = floor((rpm-settings.rpm_min)*pwm_gradient) + SPINDLE_PWM_MIN_VALUE;
+//          pwm_value = floor((rpm-settings.rpm_min) * (SPINDLE_PWM_RANGE/(settings.rpm_max-settings.rpm_min))) + SPINDLE_PWM_MIN_VALUE;
+//        // return(pwm_value);
+//
+//        //  From:  spindle_control.c >> void spindle_set_speed(uint8_t pwm_value)
+//        // TBC: 8-bit register, so 'speed' of 128 should maximize switching freq...no, did not work
+//        SPINDLE_OCR_REGISTER = pwm_value; // Set PWM output level.
+    
+//        if (SPINDLE_OCR_REGISTER == SPINDLE_PWM_OFF_VALUE) {
+//            SPINDLE_TCCRA_REGISTER &= ~(1<<SPINDLE_COMB_BIT); // Disable PWM. Output voltage is zero.
+//        } else {
+            SPINDLE_TCCRA_REGISTER |= (1<<SPINDLE_COMB_BIT); // Ensure PWM output is enabled.
+//        }
+            SPINDLE_ENABLE_PORT |= (1<<SPINDLE_ENABLE_BIT);  // Set pin to high
+
+    // Pause briefly to ensure G540 startup (loud CLICK on motion start without this...prob loss of steps) TBC 2017-02-17
+    delay_ms(100);
+    
   // Enable stepper drivers.
   if (bit_istrue(settings.flags,BITFLAG_INVERT_ST_ENABLE)) { STEPPERS_DISABLE_PORT |= (1<<STEPPERS_DISABLE_BIT); }
   else { STEPPERS_DISABLE_PORT &= ~(1<<STEPPERS_DISABLE_BIT); }
@@ -244,6 +280,17 @@ void st_go_idle()
     // stop and not drift from residual inertial forces at the end of the last movement.
     delay_ms(settings.stepper_idle_lock_time);
     pin_state = true; // Override. Disable steppers.
+
+      // Disable spindle PWM as Gecko G540 charge pump signal  TBC 2017-02-17
+      // from:  spindle_control.c >> void spindle_stop()
+        SPINDLE_TCCRA_REGISTER &= ~(1<<SPINDLE_COMB_BIT); // Disable PWM. Output voltage is zero.
+
+        #ifdef INVERT_SPINDLE_ENABLE_PIN
+            SPINDLE_ENABLE_PORT |= (1<<SPINDLE_ENABLE_BIT);  // Set pin to high
+        #else
+            SPINDLE_ENABLE_PORT &= ~(1<<SPINDLE_ENABLE_BIT); // Set pin to low
+        #endif
+
   }
   if (bit_istrue(settings.flags,BITFLAG_INVERT_ST_ENABLE)) { pin_state = !pin_state; } // Apply pin invert.
   if (pin_state) { STEPPERS_DISABLE_PORT |= (1<<STEPPERS_DISABLE_BIT); }

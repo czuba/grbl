@@ -1,0 +1,39 @@
+Place the two files included so named "optiboot_atmega328_d13_led_off" into your Arduino Optiboot folder under hardware.
+( Folder location is dependent on OS )
+
+Add the following board to your boards.txt file
+
+
+
+grbl.name=Atmega328p for grbl
+
+grbl.upload.tool=avrdude
+grbl.upload.protocol=arduino
+grbl.upload.maximum_size=32256
+grbl.upload.maximum_data_size=2048
+grbl.upload.speed=115200
+
+grbl.bootloader.tool=avrdude
+grbl.bootloader.low_fuses=0xFF
+grbl.bootloader.high_fuses=0xDE
+grbl.bootloader.extended_fuses=0x05
+grbl.bootloader.unlock_bits=0x3F
+grbl.bootloader.lock_bits=0x0F
+grbl.bootloader.file=optiboot/optiboot_atmega328_d13_led_off.hex
+
+grbl.build.mcu=atmega328p
+grbl.build.f_cpu=16000000L
+grbl.build.board=AVR_UNO
+grbl.build.core=arduino
+grbl.build.variant=standard
+
+
+
+You can now burn your atmega328p bootloader with the Arduino IDE ( I used 1.6.12 ) If your running a Nano with 328p chip it will now act like a Uno. (smaller bootloader :) )
+The main reason to use this bootloader vs a standard install of optiboot Will be led on pin D13 is no longer going to flash at power up or reset. If you have a relay
+with say a spindle attached to D13 the flashing of the led could cause it to turn on before being told to do so with G-code commands. 
+
+I used Arduino as ISP ( changed heart beat delay in isp sketch from 40 to 20 ) and Arduino IDE 1.6.12. This bootloader is for Atmega328P chips.
+Use at your own risk. 
+
+Compiled from optiboot source code 6.2 Using the " make LED_START_FLASHES=0 atmega328 " command

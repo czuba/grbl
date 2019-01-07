@@ -27,14 +27,14 @@ Released under the MIT-license. See license.txt for details.
 #include <avr/pgmspace.h>
 #include <EEPROM.h>
 
-#define SERIAL_BAUD_RATE 115200
+#define SERIAL_BAUD_RATE 57600 // slow Nano.  Uno:115200
 #define LINE_LENGTH 80U    // Grbl line length
 #define BYTE_LOCATION 942U // Grbl build info EEPROM address.
 
 
 // ----- CHANGE THIS LINE -----
 
-char build_info_line[LINE_LENGTH] = "Testing123.";
+char build_info_line[LINE_LENGTH] = "";  //"Testing123.";
 
 // -----------------------------
 
