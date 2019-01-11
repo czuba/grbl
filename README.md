@@ -14,7 +14,8 @@ This version of the Grbl controler has been specifically modified for computer c
 -% % %		#noLifeguard		% % %
 ```
 
-- This is based on _Grbl ver. 1.1e_. As of 2019, there have been a few minor updates to the main repo, but nothing that should/would have a significant impact on ViewDist functionality...certainly none that would outweigh the cost of fighting any problems that might arise. --TBC Jan 2019
+- This is based on _Grbl ver. 1.1e_. As of 2019, there have been a few minor updates to the main repo, but nothing that should/would have a significant impact on ViewDist functionality...certainly none that would outweigh the cost of fighting any problems that might arise after updating. --TBC Jan 2019
+- See [commit ea3c591](https://github.com/czuba/grbl/commit/ea3c5914570260f3b6190ce1c75a5af3eb35f17c) for most of the changes/updates that were made the original Grbl code for controlling ViewDist's gecko controller & stepper motors.
 ***
 [standard Grbl readme follows...]
 
