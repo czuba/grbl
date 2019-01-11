@@ -11,7 +11,7 @@ This version of the Grbl controler has been specifically modified for computer c
 - **If you intend to use this for anything other than a _ViewDist rig_**—or don't know exactly what that term refers to—please head over to the _[official Grbl project page](https://github.com/gnea/grbl)_, and/or proceed with caution. 
 
 ``` diff
--#noLifeguard
+-% % %		#noLifeguard		% % %
 ```
 
 - This is based on _Grbl ver. 1.1e_. As of 2019, there have been a few minor updates to the main repo, but nothing that should/would have a significant impact on ViewDist functionality...certainly none that would outweigh the cost of fighting any problems that might arise. --TBC Jan 2019

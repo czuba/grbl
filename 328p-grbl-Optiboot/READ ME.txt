@@ -1,3 +1,9 @@
+TBC:  My updated boards.txt file (from OSX Arduino 1.8.1 app) is included in this repo.
+After installing optiboot, this should replace your boards.txt file located in:
+/Applications/Arduino.app/Contents/Java/hardware/arduino/avr/boards.txt
+	Note:  be smart and backup existing before overwriting.
+
+------------------
 Place the two files included so named "optiboot_atmega328_d13_led_off" into your Arduino Optiboot folder under hardware.
 ( Folder location is dependent on OS )
 
