@@ -30,7 +30,7 @@
 #ifdef DEFAULTS_VIEWDIST_1
 // Description: Rough settings for 3d viewdist projection rig (NHB Rig 1, circa 2017)
 // NEMA 23 steppers (270 oz-in), driven by Gecko G540.  Based on Grbl generic defaults.
-#define MICROSTEPS_XY 10
+#define MICROSTEPS_XY 10 // G540 drivers have fixed 10 microstep native resolution
 #define STEP_REVS_XY 200
 #define MM_PER_REV_XY (20/36*36*5.08) // 0.2" belt pitch (==5.08mm), 20 pulley on stepper, 36 pulley on gantry
 #define MICROSTEPS_Z 10
